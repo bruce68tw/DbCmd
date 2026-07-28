@@ -1,0 +1,4 @@
+{
+  "Db": "data source=.\\SQLExpress;initial catalog=Db;integrated security=True;multipleactiveresultsets=True;TrustServerCertificate=true;",
+  "Email": "aa.bb@cc.dd"
+}
