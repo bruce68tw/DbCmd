@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="_sql\Db\查詣Project-0.sql">
+    <None Update="_sql\Db\更新 Project-0.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="_sql\Db\config.json">
