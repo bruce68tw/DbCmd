@@ -34,16 +34,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="_sql\Db\更新 Project-0.sql">
+    <None Update="_sql\3.DbSoft\config.prod.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="_sql\Db\config.json">
+    <None Update="_sql\3.DbSoft\1.同步基本資料-0.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\3.DbSoft\config.dev.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="_log\" />
+    <Folder Include="_sql\2.DbNet\" />
+    <Folder Include="_sql\1.GroupProg\" />
+    <Folder Include="_sql\4.Early\" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using Base.Services;
 using DbCmd.Models;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DbCmd.Services
@@ -26,9 +26,12 @@ namespace DbCmd.Services
             var dirSql = _Str.AddDirSep(_Fun.DirRoot + "_sql");
             if (!Directory.Exists(dirSql))
             {
-                _Log.Error($"{preLog}Directory not found : {dirSql}");
+                await _Log.ErrorA($"{preLog}Directory not found : {dirSql}");
                 return;
             }
+
+            //get config file name
+            var configFile = _Fun.IsDev ? "config.dev.json" : "config.prod.json";
 
             #region 讀取目錄清單(目錄對應資料庫) & loop
             //每個子目錄代表一個 Database
@@ -38,18 +41,32 @@ namespace DbCmd.Services
                 _Log.Info($"{preLog}Folder is {dbName}");
 
                 //讀取目錄下的 config.json
-                var configFile = Path.Combine(dirDb, "config.json");
-                if (!File.Exists(configFile))
+                var configPath = Path.Combine(dirDb, configFile);
+                if (!File.Exists(configPath))
                 {
-                    _Log.Error($"{preLog}config.json not found.");
+                    await _Log.ErrorA($"{preLog}{configFile} not found.");
                     continue;
                 }
 
-                var config = JsonSerializer.Deserialize<SqlConfigDto>(
-                    await File.ReadAllTextAsync(configFile));
-                if (config == null)
+                //read to config 
+                SqlConfigDto config = null;
+                try
                 {
-                    _Log.Error($"{preLog}config parse failed.");
+                    //使用 NewtonSoft 可以放註解
+                    var json = await File.ReadAllTextAsync(configPath);
+                    config = JsonConvert.DeserializeObject<SqlConfigDto>(json);
+
+                    //config = JsonSerializer.Deserialize<SqlConfigDto>(
+                    //    await File.ReadAllTextAsync(configPath));
+                    if (config == null)
+                    {
+                        await _Log.ErrorA($"{preLog}{configFile} parse failed.");
+                        continue;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _Log.ErrorA($"{preLog}{configFile} parse failed. {ex.Message}");
                     continue;
                 }
 
@@ -66,7 +83,7 @@ namespace DbCmd.Services
                     var cols = fileName0.Split("-");
                     if (cols.Length != 2)
                     {
-                        _Log.Error($"{preLog}sql FileName format is xxx-xxx.sql({fileName0})");
+                        await _Log.ErrorA($"{preLog}sql FileName format is xxx-xxx.sql({fileName0})");
                         continue;
                     }
 
@@ -79,13 +96,13 @@ namespace DbCmd.Services
                     //連線 DB if need
                     if (!ConnectDb(config.Db))
                     {
-                        _Log.Error($"{preLog}connect DB failed.({fileName0})");
+                        await _Log.ErrorA($"{preLog}connect DB failed.({fileName0})");
                         break;
                     }
 
                     //run sql & log
                     var sql = await File.ReadAllTextAsync(sqlFile);
-                    var rows = await _db.ExecSqlA(sql);
+                    var rows = await _db.ExecSqlA(sql);     //筆數會加總 !!
                     _Log.Info($"{preLog}SQL file: {fileName0}");
                     _Log.Info($"{preLog}SQL OK rows: {rows}");
                 }

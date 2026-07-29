@@ -6,7 +6,7 @@
     public class SqlConfigDto
     {
         public string Db { get; set; } = "";
-        public string Email { get; set; } = "";
+        //public string RootEmail { get; set; } = "";
 
     }
 }

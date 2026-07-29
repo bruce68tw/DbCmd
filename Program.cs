@@ -56,6 +56,7 @@ namespace DbCmd
             _Fun.Init(isDev, diBox, Base.Enums.DbTypeEnum.MSSql, Base.Enums.AuthTypeEnum.None, false);
             #endregion
 
+            /*
             //decode after _Fun.Init(), 連線HR目錄, 有加密
             if (_Fun.Config.Encode)
             {
@@ -63,6 +64,7 @@ namespace DbCmd
                 //_Xp.Config.HrDirUid = _Str.DecodeByKey(_Xp.Config.HrDirUid, key).Replace("\\\\", "\\");   //有domain
                 //_Xp.Config.HrDirPwd = _Str.DecodeByKey(_Xp.Config.HrDirPwd, key);
             }
+            */
 
             //7.run service 
             //todo: temp remark
