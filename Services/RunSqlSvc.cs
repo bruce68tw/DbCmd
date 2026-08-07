@@ -37,8 +37,8 @@ namespace DbCmd.Services
             //每個子目錄代表一個 Database
             foreach (var dirDb in Directory.GetDirectories(dirSql))
             {
-                var dbName = Path.GetFileName(dirDb);
-                _Log.Info($"{preLog}Folder is {dbName}");
+                var dirName = Path.GetFileName(dirDb);
+                _Log.Info($"{preLog}Folder is {dirName}");
 
                 //讀取目錄下的 config.json
                 var configPath = Path.Combine(dirDb, configFile);
@@ -88,7 +88,7 @@ namespace DbCmd.Services
                     }
 
                     var fileName = cols[0];                    
-                    var timeType = cols[1]; //時間格式:-1(1點執行), -P2(每2小時執行)
+                    var timeType = cols[1]; //時間格式:0(立即執行), -1(1點執行), -P2(每2小時執行)
 
                     //判斷是否符合執行時間
                     if (!NeedRun(timeType)) continue;

@@ -34,6 +34,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="_sql\1.GroupProg\2.新增XpDept-0.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\1.GroupProg\1.新增OrgEmp-0.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\1.GroupProg\config.dev.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\1.GroupProg\config.prod.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\2.DbNet\1.同步基本資料-0.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\2.DbNet\config.dev.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="_sql\2.DbNet\config.prod.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="_sql\3.DbSoft\config.prod.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -48,8 +69,6 @@
   <ItemGroup>
     <Folder Include="_log\" />
     <Folder Include="_sql\2.DbNet\" />
-    <Folder Include="_sql\1.GroupProg\" />
-    <Folder Include="_sql\4.Early\" />
   </ItemGroup>
 
 </Project>
