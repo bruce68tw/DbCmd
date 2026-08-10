@@ -17,5 +17,3 @@ node_modules/
 wwwroot/jsView/*.*
 wwwroot/base.*
 wwwroot/lib.*
-appsettings.Production.json
-appsettings.Production-net.json
