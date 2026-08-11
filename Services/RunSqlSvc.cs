@@ -109,7 +109,10 @@ namespace DbCmd.Services
 
                 //Close Db if need
                 if (_db != null)
+                {
                     await _db.DisposeAsync();
+                    _db = null;
+                }
             }
             #endregion
 
